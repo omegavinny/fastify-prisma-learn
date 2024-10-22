@@ -2,16 +2,10 @@ import * as dotenv from 'dotenv';
 
 dotenv.config();
 
-const APP_HOST: string = process.env.APP_HOST || '127.0.0.1' ; 
-const APP_PORT: number = process.env.APP_PORT ? parseInt(process.env.APP_PORT) : 3000;
-const APP_TZ: string = process.env.APP_TZ || 'Etc/GMT+3';  
-const APP_USER: string = process.env.APP_USER || 'user';
-const APP_PASS: string = process.env.APP_PASS || 'password';
+const HOST: string = process.env.HOST || '127.0.0.1'; 
+const PORT: number = process.env.PORT ? parseInt(process.env.PORT) : 3000;
+const TZ: string = process.env.TZ || 'America/Sao_Paulo';  
+const USER: string = process.env.USER || 'user';
+const PASS: string = process.env.PASS || 'password';
 
-export {
-    APP_HOST,
-    APP_PASS,
-    APP_PORT,
-    APP_TZ,
-    APP_USER,
-};
+export { HOST, PASS, PORT, TZ, USER };

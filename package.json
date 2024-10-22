@@ -1,27 +1,31 @@
 {
   "name": "simproc",
   "version": "1.0.0",
-  "main": "build/index.js",
+  "main": "build/server.js",
   "scripts": {
     "build": "tsc",
-    "dev": "tsx watch ./src/index.ts",
-    "start": "node build/api/index.js"
+    "dev": "tsx watch ./src/server.ts",
+    "start": "node ./build/api/server.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@2captcha/captcha-solver": "^1.2.0",
     "@fastify/cors": "^10.0.1",
+    "@prisma/client": "^5.21.1",
     "dotenv": "^16.4.5",
     "fastify": "^5.0.0",
     "node-schedule": "^2.1.1",
     "puppeteer": "^23.6.0",
-    "typescript": "^5.6.3"
+    "puppeteer-core": "^23.6.0"
   },
   "devDependencies": {
     "@types/node": "^22.7.7",
     "@types/node-schedule": "^2.1.7",
-    "tsx": "^4.19.1"
+    "prisma": "^5.21.1",
+    "tsx": "^4.19.1",
+    "typescript": "^5.6.3"
   }
 }
