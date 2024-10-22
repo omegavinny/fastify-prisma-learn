@@ -1,0 +1,67 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Role {
+  id        String         @id @default(uuid())
+  name      String
+  isActive  Boolean        @default(false)
+  Rule      RolesOnRules[]
+  User      User[]
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @updatedAt
+  deletedAt DateTime?
+}
+
+model Rule {
+  id        String         @id @default(uuid())
+  name      String
+  isActive  Boolean        @default(false)
+  Role      RolesOnRules[]
+  User      RulesOnUser[]
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @updatedAt
+  deletedAt DateTime?
+}
+
+model User {
+  id        String        @id @default(uuid())
+  email     String        @unique
+  username  String        @unique
+  password  String
+  isActive  Boolean       @default(false)
+  roleId    String
+  role      Role          @relation(fields: [roleId], references: [id])
+  rules     RulesOnUser[]
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+  deletedAt DateTime?
+}
+
+model RolesOnRules {
+  ruleId     String
+  roleId     String
+  rules      Rule     @relation(fields: [ruleId], references: [id])
+  roles      Role     @relation(fields: [roleId], references: [id])
+  assignedAt DateTime @default(now())
+
+  @@id([ruleId, roleId])
+}
+
+model RulesOnUser {
+  ruleId     String
+  userId     String
+  rules      Rule     @relation(fields: [ruleId], references: [id])
+  users      User     @relation(fields: [userId], references: [id])
+  assignedAt DateTime @default(now())
+
+  @@id([ruleId, userId])
+}
